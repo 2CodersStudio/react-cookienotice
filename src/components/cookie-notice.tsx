@@ -171,7 +171,6 @@ const CookieNotice = ({
 
   const handleDeclineAllButtonClick = useCallback(() => {
     setHideNotice(true)
-    setCookie(validCookieName, 'true', validCookieExpiration)
     onDeclineAllButtonClick?.()
   }, [])
 
