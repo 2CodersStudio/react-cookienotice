@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { formatMessage } from '../../intl/format'
-import Text from '../text'
 
 interface ServiceItemProps {
   name: string
@@ -18,16 +16,13 @@ const ServiceItem = ({
   description,
   code,
   alwaysActive,
-  alwaysActiveLabel,
   isChecked,
   onCheckboxChange,
 }: ServiceItemProps) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen] = useState(false)
   const contentRef = useRef<HTMLDivElement | null>(null)
 
-  const handleButtonClick = () => {
-    setIsOpen(!isOpen)
-  }
+
 
   useEffect(() => {
     if (contentRef.current instanceof HTMLDivElement) {
@@ -41,7 +36,7 @@ const ServiceItem = ({
   }, [isOpen])
 
   return (
-    <div className='react-cookienotice-service'>
+    <div className='react-cookienotice-service' style={{display: 'flex', flexDirection: 'row', alignItems: 'start', justifyContent: 'start'}}>
       <div className='react-cookienotice-service-checkbox'>
         <input
           type='checkbox'
@@ -54,17 +49,7 @@ const ServiceItem = ({
         <label htmlFor={code}>{code}</label>
       </div>
       <div className='react-cookienotice-service-info'>
-        <button
-          className={`react-cookienotice-service-info-title${isOpen ? ' open' : ''}`}
-          onClick={handleButtonClick}
-        >
           {name}
-          {alwaysActive && (
-            <Text className='react-cookienotice-service-info-title-always-active'>
-              {formatMessage('text.alwaysActive', alwaysActiveLabel)}
-            </Text>
-          )}
-        </button>
         <div
           ref={contentRef}
           className='react-cookienotice-service-info-content'
